@@ -2,21 +2,26 @@ import axios from 'axios';
 
 const ApiService = {
 
-    Receita : () =>{
-        //return axios.get('/receita/resumo');
-        return axios.get('http://pmweb.agencia.pmweb.com.br/teste-frontend/api/intranet/campaigns.json');
+    ReceitaPainel : () =>{
+        return axios.get('/receita/painel');
     },
-    Pedidos : () =>{
-        //return axios.get('/pedidos/resumo');
-        return axios.get('http://pmweb.agencia.pmweb.com.br/teste-frontend/api/intranet/campaigns.json');
+    PedidosPainel : () =>{
+        return axios.get('/pedido/painel');
     },
-    Produtos : () =>{
-        //return axios.get('/produtos/resumo');
-        return axios.get('http://pmweb.agencia.pmweb.com.br/teste-frontend/api/intranet/campaigns.json');
+    ProdutosPainel : () =>{
+        return axios.get('/produto/painel');
     },
-    Meta : () =>{
-        //return axios.get('/meta/resumo');
-        return axios.get('http://pmweb.agencia.pmweb.com.br/teste-frontend/api/intranet/campaigns.json');
+    MetaPainel : () =>{
+        return axios.get('/meta');
+    },
+    MidiaPainel : () =>{
+        return axios.get('/midia/painel');
+    },
+    DevicePainel : () =>{
+        return axios.get('/device/painel');
+    },
+    CategoriaPainel : () =>{
+        return axios.get('/categoria/painel');
     }    
 };
 export default ApiService;

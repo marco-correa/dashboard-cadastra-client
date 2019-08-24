@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Item from '../components/Item';
 import Lista from '../components/Lista';
 
@@ -7,27 +7,34 @@ import styled from 'styled-components';
 const PainelItens = styled.section`
     display: flex;
     justify-content: space-between;
-    padding: 0 1em;
 `;
 
+const Main = styled.main`
+    padding: 0 1em 1em 1em;
+`;
 
 
 const Home = () => {
     return(
-        <main>
-            <div className="jumbotron">
-                <h1 className="text-center">Dashboard Cadastra</h1>
-            </div>
+        <Fragment>
+            <header>
+                <div className="jumbotron">
+                    <h1 className="text-center">Dashboard Cadastra</h1>
+                </div>
+            </header>
+            <Main>
+                <PainelItens>
+                    <Item requisicao="ReceitaPainel" titulo="Receita total" />
+                    <Item requisicao="PedidosPainel" titulo="Total de pedidos" />
+                    <Item requisicao="ProdutosPainel" titulo="Produtos vendidos" />
+                    <Item requisicao="MetaPainel" titulo="Percentual da meta" />
+                </PainelItens>
 
-            <PainelItens>
-                <Item requisicao="Receita" titulo="Receita total" />
-                <Item requisicao="Pedidos" titulo="Total de pedidos" />
-                <Item requisicao="Produtos" titulo="Produtos vendidos" />
-                <Item requisicao="Meta" titulo="Percentual da meta" />
-            </PainelItens>
-
-            <Lista />
-        </main>
+                <Lista requisicao="MidiaPainel" titulo="Receitar por Mídia"/>
+                <Lista requisicao="DevicePainel" titulo="Receitar por Device"/>
+                <Lista requisicao="CategoriaPainel" titulo="Receitar por Categoria"/>
+            </Main>
+        </Fragment>
     );
 };
 export default Home;

@@ -1,14 +1,27 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
 import ApiService from '../utils/ApiService';
 
-const Bloco = styled.div`
-    flex: 0 0 24%;
+const Bloco = styled.section`
+    margin-top: 1em;
     border: 1px solid #54545452;
     border-radius: 3px;
-    background-color: #fff;
-    padding: 1em;
+
+    &.loading{
+        padding: 1em;
+    }
+`;
+
+const Table = styled.table`
+position: relative;
+    opacity: 1;
+    animation: animaBloco 1.5s;
+
+    @keyframes animaBloco {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
 `;
 
 
@@ -26,47 +39,70 @@ class Lista extends Component {
 
     componentDidMount(){
 
-/*        var metodo = ApiService[this.state.requisicao];
+        const metodo = ApiService[this.state.requisicao];
+        
         metodo()
             .then( res => {
                 //this.setState({ dados: res.data });
 
                 this.setState({ 
-                    dados: {
-                        valor: "R$ 99",
-                        legenda: {
-                            texto: "Meta sobre",
-                            valor: "15k"
+                    dados: [
+                        {
+                            nome: "Links Patrocinados",
+                            receita: 123,
+                            porcentagem: 15
+                        },
+                        {
+                            nome: "SEO",
+                            receita: 234,
+                            porcentagem: 10
+                        },
+                        {
+                            nome: "Busca orgânica",
+                            receita: 345,
+                            porcentagem: 5
                         }
-                    }
+                    ]
                 });
             })
             .catch( error => {
                 console.log(error);
-            });*/
+            });
     }
 
     render() {
         const { dados } = this.state;
 
         return (
-            <Bloco>
-                { this.state.dados.length === 0 ? 
-
-                    <Loader />
-                    
+            <Bloco className={dados.length === 0 ? 'loading' : '' }>
+                { dados.length === 0 ? 
+                    <Loader />                  
                     :
-
-                    <Fragment>
-                        <Titulo>{this.state.titulo}</Titulo>
-                        <Informacoes>
-                            <Valor>{dados.valor}</Valor>
-                        </Informacoes>
-                        <Legenda>{dados.legenda.texto + ' ' + dados.legenda.valor}</Legenda>
-                    </Fragment>
+                    <Table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">{ this.state.titulo }</th>
+                                <th scope="col">Receita</th>
+                                <th scope="col">Porcentagem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                dados.map( (item, index) => {
+                                    return(
+                                        <tr key={ index }>
+                                            <td>{ item.nome }</td>
+                                            <td>{ item.receita }</td>
+                                            <td>{ item.porcentagem }</td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </Table>
                 }
             </Bloco>
         );
     }
 }
-export default Item;
+export default Lista;

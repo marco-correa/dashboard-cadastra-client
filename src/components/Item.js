@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Loader from './Loader';
 import ApiService from '../utils/ApiService';
@@ -9,6 +9,17 @@ const Bloco = styled.div`
     border-radius: 3px;
     background-color: #fff;
     padding: 1em;
+`;
+
+const Conteudo = styled.div`
+    position: relative;
+    opacity: 1;
+    animation: animaBloco 1.5s;
+
+    @keyframes animaBloco {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
 `;
 
 const Titulo = styled.div`
@@ -51,14 +62,15 @@ class Item extends Component {
 
     componentDidMount(){
 
-        var metodo = ApiService[this.state.requisicao];
+        const metodo = ApiService[this.state.requisicao];
+        
         metodo()
             .then( res => {
                 //this.setState({ dados: res.data });
 
                 this.setState({ 
                     dados: {
-                        valor: "R$ 99",
+                        valor: 99,
                         legenda: {
                             texto: "Meta sobre",
                             valor: "15k"
@@ -76,19 +88,16 @@ class Item extends Component {
 
         return (
             <Bloco>
-                { this.state.dados.length === 0 ? 
-
-                    <Loader />
-                    
+                { dados.length === 0 ? 
+                    <Loader />                  
                     :
-
-                    <Fragment>
+                    <Conteudo>
                         <Titulo>{this.state.titulo}</Titulo>
                         <Informacoes>
-                            <Valor>{dados.valor}</Valor>
+                            <Valor>R$ {dados.valor}</Valor>
                         </Informacoes>
                         <Legenda>{dados.legenda.texto + ' ' + dados.legenda.valor}</Legenda>
-                    </Fragment>
+                    </Conteudo>
                 }
             </Bloco>
         );
