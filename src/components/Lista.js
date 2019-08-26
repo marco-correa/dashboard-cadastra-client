@@ -17,6 +17,7 @@ const Table = styled.table`
 position: relative;
     opacity: 1;
     animation: animaBloco 1.5s;
+    margin-bottom: 0;
 
     @keyframes animaBloco {
         0% { opacity: 0; }
@@ -43,27 +44,42 @@ class Lista extends Component {
         
         metodo()
             .then( res => {
-                //this.setState({ dados: res.data });
+                let valorTotal = 0;
 
-                this.setState({ 
-                    dados: [
-                        {
-                            nome: "Links Patrocinados",
-                            receita: 123,
-                            porcentagem: 15
-                        },
-                        {
-                            nome: "SEO",
-                            receita: 234,
-                            porcentagem: 10
-                        },
-                        {
-                            nome: "Busca orgânica",
-                            receita: 345,
-                            porcentagem: 5
-                        }
-                    ]
+                res.data.map( item => {
+                    valorTotal += parseInt(item.receita.replace('.', ','));
                 });
+
+                let dadosAlterados = res.data.map( item => {
+                    let novoItem = {
+                        nome: item.nome,
+                        receita: item.receita,
+                        porcentagem: ((item.receita / valorTotal) * 100).toFixed(2) + "%"
+                    };
+                    return novoItem;
+                });
+                
+                this.setState({ dados: dadosAlterados });
+
+                // this.setState({ 
+                //     dados: [
+                //         {
+                //             nome: "Links Patrocinados",
+                //             receita: 123,
+                //             porcentagem: 15
+                //         },
+                //         {
+                //             nome: "SEO",
+                //             receita: 234,
+                //             porcentagem: 10
+                //         },
+                //         {
+                //             nome: "Busca orgânica",
+                //             receita: 345,
+                //             porcentagem: 5
+                //         }
+                //     ]
+                // });
             })
             .catch( error => {
                 console.log(error);

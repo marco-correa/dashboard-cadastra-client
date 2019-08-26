@@ -44,6 +44,8 @@ const Valor = styled.p`
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+    width: 100%;
+    text-align: center;
 `;
 
 const Legenda = styled.p`
@@ -61,6 +63,7 @@ class Item extends Component {
             titulo: props.titulo,
             legenda: props.legenda !== undefined ? props.legenda : '',
             requisicao: props.requisicao,
+            tipo: props.tipo,
             dados: []
         };
     }
@@ -71,17 +74,17 @@ class Item extends Component {
         
         metodo()
             .then( res => {
-                //this.setState({ dados: res.data });
+                this.setState({ dados: res.data });
 
-                this.setState({ 
-                    dados: {
-                        valor: 99,
-                        legenda: {
-                            texto: "Meta sobre",
-                            valor: "15k"
-                        }
-                    }
-                });
+                // this.setState({ 
+                //     dados: {
+                //         valor: 99,
+                //         legenda: {
+                //             texto: "Meta sobre",
+                //             valor: "15k"
+                //         }
+                //     }
+                // });
             })
             .catch( error => {
                 console.log(error);
@@ -89,9 +92,12 @@ class Item extends Component {
     }
 
     render() {
-        const { dados, legenda } = this.state;
+        const { dados, legenda, tipo } = this.state;
+        const valorAlterado = 
+            (dados.valor !== undefined && tipo === 'valor') ?
+                "R$ " + dados.valor.replace(".",",")
+            : dados.valor;
 
-        console.log(legenda);
         return (
             <Bloco>
                 { dados.length === 0 ? 
@@ -100,7 +106,7 @@ class Item extends Component {
                     <Conteudo className={ legenda === '' ?  'alinha' : ''}>
                         <Titulo>{ this.state.titulo }</Titulo>
                         <Informacoes>
-                            <Valor>R$ { dados.valor }</Valor>
+                            <Valor>{ valorAlterado }</Valor>
                         </Informacoes>
                         <Legenda>{ legenda }</Legenda>
                     </Conteudo>

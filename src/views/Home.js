@@ -24,15 +24,15 @@ const Home = () => {
             </header>
             <Main>
                 <PainelItens>
-                    <Item requisicao="ReceitaPainel" titulo="Receita total" />
-                    <Item requisicao="PedidosPainel" titulo="Total de pedidos" />
-                    <Item requisicao="ProdutosPainel" titulo="Produtos vendidos" />
-                    <Item requisicao="MetaPainel" titulo="Percentual da meta" legenda="Percentual sobre R$ 1.500.00,00"/>
+                    <Item requisicao="ReceitaPainel" titulo="Receita total" tipo="valor"/>
+                    <Item requisicao="PedidosPainel" titulo="Total de pedidos" tipo="dado"/>
+                    <Item requisicao="ProdutosPainel" titulo="Produtos vendidos" tipo="dado"/>
+                    <Item requisicao="MetaPainel" titulo="Percentual da meta" legenda="Percentual sobre R$ 1.500.00,00" tipo="dado"/>
                 </PainelItens>
 
-                <Lista requisicao="MidiaPainel" titulo="Receitar por Mídia"/>
-                <Lista requisicao="DevicePainel" titulo="Receitar por Device"/>
-                <Lista requisicao="CategoriaPainel" titulo="Receitar por Categoria"/>
+                <Lista requisicao="MidiaPainel" titulo="Receita por Mídia"/>
+                <Lista requisicao="DevicePainel" titulo="Receita por Device"/>
+                <Lista requisicao="CategoriaPainel" titulo="Receita por Categoria"/>
             </Main>
         </Fragment>
     );
