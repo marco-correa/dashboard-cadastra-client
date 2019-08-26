@@ -27,7 +27,7 @@ const Home = () => {
                     <Item requisicao="ReceitaPainel" titulo="Receita total" />
                     <Item requisicao="PedidosPainel" titulo="Total de pedidos" />
                     <Item requisicao="ProdutosPainel" titulo="Produtos vendidos" />
-                    <Item requisicao="MetaPainel" titulo="Percentual da meta" />
+                    <Item requisicao="MetaPainel" titulo="Percentual da meta" legenda="Percentual sobre R$ 1.500.00,00"/>
                 </PainelItens>
 
                 <Lista requisicao="MidiaPainel" titulo="Receitar por Mídia"/>

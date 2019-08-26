@@ -1,27 +1,30 @@
 import axios from 'axios';
 
+const urlBaseApi = 'http://localhost:80';
+
 const ApiService = {
 
     ReceitaPainel : () =>{
-        return axios.get('/receita/painel');
+        return axios.get(urlBaseApi + '/receita/painel');
     },
     PedidosPainel : () =>{
-        return axios.get('/pedido/painel');
+        return axios.get(urlBaseApi + '/pedido/painel');
     },
     ProdutosPainel : () =>{
-        return axios.get('/produto/painel');
+        return axios.get(urlBaseApi + '/produto/painel');
     },
     MetaPainel : () =>{
-        return axios.get('/meta');
+        return axios.get(urlBaseApi + '/meta');
     },
+
     MidiaPainel : () =>{
-        return axios.get('/midia/painel');
+        return axios.get(urlBaseApi + '/midia/painel');
     },
     DevicePainel : () =>{
-        return axios.get('/device/painel');
+        return axios.get(urlBaseApi + '/device/painel');
     },
     CategoriaPainel : () =>{
-        return axios.get('/categoria/painel');
+        return axios.get(urlBaseApi + '/categoria/painel');
     }    
 };
 export default ApiService;

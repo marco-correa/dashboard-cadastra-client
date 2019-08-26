@@ -16,6 +16,10 @@ const Conteudo = styled.div`
     opacity: 1;
     animation: animaBloco 1.5s;
 
+    &.alinha{
+        top: 10%;
+    }
+
     @keyframes animaBloco {
         0% { opacity: 0; }
         100% { opacity: 1; }
@@ -55,6 +59,7 @@ class Item extends Component {
 
         this.state = {
             titulo: props.titulo,
+            legenda: props.legenda !== undefined ? props.legenda : '',
             requisicao: props.requisicao,
             dados: []
         };
@@ -84,19 +89,20 @@ class Item extends Component {
     }
 
     render() {
-        const { dados } = this.state;
+        const { dados, legenda } = this.state;
 
+        console.log(legenda);
         return (
             <Bloco>
                 { dados.length === 0 ? 
                     <Loader />                  
                     :
-                    <Conteudo>
-                        <Titulo>{this.state.titulo}</Titulo>
+                    <Conteudo className={ legenda === '' ?  'alinha' : ''}>
+                        <Titulo>{ this.state.titulo }</Titulo>
                         <Informacoes>
-                            <Valor>R$ {dados.valor}</Valor>
+                            <Valor>R$ { dados.valor }</Valor>
                         </Informacoes>
-                        <Legenda>{dados.legenda.texto + ' ' + dados.legenda.valor}</Legenda>
+                        <Legenda>{ legenda }</Legenda>
                     </Conteudo>
                 }
             </Bloco>
